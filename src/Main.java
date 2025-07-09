@@ -18,6 +18,20 @@ public class Main {
         int numberCruiser = 0;
         int numberBattleship = 0;
 
+        String symbolDestroyer = "|Z|";
+        String symbolCruiser = "|K|";
+        String symbolBattleship = "|B|";
+
+        int numberComputerDestroyer = 0;
+        int numberComputerCruiser = 0;
+        int numberComputerBattleship = 0;
+
+        int destroyerLength = 2;
+        int cruiserLength = 3;
+        int battleshipLength = 4;
+
+        boolean placeable = true;
+
         String welcome = "Willkommen im Spiel Schiffeversenken";
 
         String menuStartExit = "1: Spiel starten" + "\n" + "2: Spiel beenden" + "\n";
