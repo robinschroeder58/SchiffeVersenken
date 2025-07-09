@@ -56,11 +56,204 @@ public class Main {
         String menuConfirmExit = "Sicher das Sie das Spiel beenden wollen? (y/n)";
         String outputExit = "Spiel wird beendet!";
 
-        System.out.println("Hello World!");
+        while (true) {
 
+            System.out.println(welcome);
+            System.out.println(menuStartExit);
 
+            int entryMenu = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (entryMenu) {
+                case 1:
+                    while (true) {
+                        System.out.println(menuUsername);
+                        String entryUsername = scanner.nextLine();
+                        entryUsername = entryUsername.trim();
+                        username = entryUsername;
+
+                        if (!entryUsername.trim().isEmpty()) {
+                            System.out.println(menuConfirmedUsername);
+                            String confirmUsername = scanner.nextLine().toLowerCase();
+
+                            if (confirmUsername.equals("y")) {
+                                System.out.println(outputStartGame);
+                                break;
+                            } else if (confirmUsername.equals("n")) {
+                                System.out.println("Erneuter Versuch.");
+                            } else {
+                                System.out.println(outputInvalidEntry);
+                            }
+                        } else {
+                            System.out.println("Username darf nicht leer sein.");
+                        }
+                    }
+
+                    while (true) {
+                        map.printMap(userBoard);
+                        if (numberDestroyer == 4 && numberCruiser == 2 && numberBattleship == 1) {
+                            System.out.println(outputAllShipPlaced);
+                        }
+                        System.out.println(getMenuShipPlacement(numberDestroyer, numberCruiser, numberBattleship));
+                        System.out.println();
+
+                        int entryPlaceShip = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch (entryPlaceShip) {
+                            case 1:
+                                if (numberDestroyer >= 0 && numberDestroyer < 4) {
+                                    //Spalte
+                                    System.out.println(outputEntryColumn);
+                                    String entryColumn = scanner.nextLine();
+                                    entryColumn = entryColumn.toUpperCase().trim();
+
+                                    //Reihe
+                                    System.out.println(outputEntryRow);
+                                    int entryRow = scanner.nextInt();
+                                    scanner.nextLine();
+
+                                    //Horizontal
+                                    System.out.println(outputEntryHorizontally);
+                                    String entryHorizontal = scanner.nextLine();
+                                    entryHorizontal = entryHorizontal.toUpperCase().trim();
+
+                                    //Übergabe an Funktion zum Prüfen des Platzes und platzieren des Schiffes.
+                                    placeable = placeShip(userBoard, entryColumn, entryRow, entryHorizontal, destroyerLength, symbolDestroyer);
+
+                                    if (placeable) {
+                                        numberDestroyer++;
+                                    } else {
+                                        System.out.println(outputNoPlacmentHappend);
+                                    }
+                                } else {
+                                    System.out.println(outputCounterShipPlacedFull);
+                                }
+                                break;
+                            case 2:
+                                if (numberCruiser >= 0 && numberCruiser < 2) {
+                                    //Spalte
+                                    System.out.println(outputEntryColumn);
+                                    String entryColumn = scanner.nextLine();
+                                    entryColumn = entryColumn.toUpperCase().trim();
+
+                                    //Reihe
+                                    System.out.println(outputEntryRow);
+                                    int entryRow = scanner.nextInt();
+                                    scanner.nextLine();
+
+                                    //Horizontal
+                                    System.out.println(outputEntryHorizontally);
+                                    String entryHorizontal = scanner.nextLine();
+                                    entryHorizontal = entryHorizontal.toUpperCase().trim();
+
+                                    //Übergabe an Funktion zum Prüfen des Platzes und platzieren des Schiffes.
+                                    placeable = placeShip(userBoard, entryColumn, entryRow, entryHorizontal, cruiserLength, symbolCruiser);
+
+                                    if (placeable) {
+                                        numberCruiser++;
+                                    } else {
+                                        System.out.println(outputNoPlacmentHappend);
+                                    }
+                                } else {
+                                    System.out.println(outputCounterShipPlacedFull);
+                                }
+                                break;
+                            case 3:
+                                if (numberBattleship >= 0 && numberBattleship < 1) {
+                                    //Spalte
+                                    System.out.println(outputEntryColumn);
+                                    String entryColumn = scanner.nextLine();
+                                    entryColumn = entryColumn.toUpperCase().trim();
+
+                                    //Reihe
+                                    System.out.println(outputEntryRow);
+                                    int entryRow = scanner.nextInt();
+                                    scanner.nextLine();
+
+                                    //Horizontal
+                                    System.out.println(outputEntryHorizontally);
+                                    String entryHorizontal = scanner.nextLine();
+                                    entryHorizontal = entryHorizontal.toUpperCase().trim();
+
+                                    //Übergabe an Funktion zum Prüfen des Platzes und platzieren des Schiffes.
+                                    placeable = placeShip(userBoard, entryColumn, entryRow, entryHorizontal, battleshipLength, symbolBattleship);
+
+                                    if (placeable) {
+                                        numberBattleship++;
+                                    } else {
+                                        System.out.println(outputNoPlacmentHappend);
+                                    }
+                                } else {
+                                    System.out.println(outputCounterShipPlacedFull);
+                                }
+                                break;
+                            case 4:
+                                if (numberDestroyer == 4 && numberCruiser == 2 && numberBattleship == 1) {
+
+                                    while (true) {
+                                        int entryGameplay = scanner.nextInt();
+                                        scanner.nextLine();
+
+                                        switch (entryGameplay) {
+                                            case 1:
+
+                                                shooting(computerBoard, scanner);
+
+                                                break;
+                                            case 2:
+                                                showBoardOverview(map, userBoard, computerBoard);
+                                                break;
+                                            case 3:
+                                                System.out.println(menuConfirmExit);
+                                                String confirmExit = scanner.nextLine();
+                                                if (confirmExit.equals("y")) {
+                                                    System.out.println(outputExit);
+                                                    System.exit(0);
+                                                }
+                                                break;
+                                            default:
+                                                System.out.println(outputInvalidEntry);
+                                                break;
+                                        }
+                                    }
+                                } else {
+                                    System.out.println(outputNotAllShipPlaced);
+                                }
+                                break;
+                            case 5:
+                                showBoardOverview(map, userBoard, computerBoard);
+                                break;
+                            case 6:
+                                System.out.println(menuConfirmExit);
+                                String confirmExit = scanner.nextLine();
+                                if (confirmExit.equals("y")) {
+                                    System.out.println(outputExit);
+                                    System.exit(0);
+                                }
+                                break;
+                            default:
+                                System.out.println(outputInvalidEntry);
+                                break;
+                        }
+                    }
+                case 2:
+                    System.out.println(menuConfirmExit);
+                    String confirmExit = scanner.nextLine();
+                    if (confirmExit.equals("y")) {
+                        System.out.println(outputExit);
+                        System.exit(0);
+                    }
+                    System.out.println(outputExit);
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println(outputInvalidEntry);
+                    break;
+            }
+        }
     }
-}
 
     public static String getMenuShipPlacement(int numberDestroyer, int numberCruiser, int numberBattleship) {
 
@@ -114,3 +307,67 @@ public class Main {
         }
         return true;
     }
+
+    public static boolean placeShip(String[][] userBoard, String column, int row, String horizontal, int shipLength, String shipSymbol) {
+
+        int colIndex = column.charAt(0) - 'A';
+        int rowIndex = row - 1;
+
+        boolean placeable = false;
+
+        placeable = confirmPlace(userBoard, column, row, horizontal, shipLength);
+
+        if (placeable) {
+
+            if (horizontal.equals("Y")) {
+                for (int i = 0; i < shipLength; i++) {
+                    userBoard[rowIndex][colIndex + i] = shipSymbol;
+                }
+            } else {
+                for (int i = 0; i < shipLength; i++) {
+                    userBoard[rowIndex + i][colIndex] = shipSymbol;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static void shooting(String[][] userBoard, Scanner scanner) {
+        String outputNeedCoordinates = "Erbitte um Koordinaten!";
+
+        String outputEntryColumn = "Bitte geben Sie eine Spalte ein:";
+        String outputEntryRow = "Bitte geben Sie eine Reihe ein:";
+
+        String alreadyShooted = "Dieser Bereich wurde bereits beschossen, bitte erneut versuchen.";
+
+        while (true) {
+            System.out.println(outputNeedCoordinates);
+            // Spalte
+            System.out.println(outputEntryColumn);
+            String entryColumn = scanner.nextLine().toUpperCase().trim();
+            int colIndex = entryColumn.charAt(0) - 'A';
+
+            // Reihe
+            System.out.println(outputEntryRow);
+            int entryRow = scanner.nextInt();
+            scanner.nextLine(); // clear buffer
+            int rowIndex = entryRow - 1;
+
+            if (userBoard[rowIndex][colIndex].equals("|Z|") || userBoard[rowIndex][colIndex].equals("|K|") || userBoard[rowIndex][colIndex].equals("|B|")) {
+                userBoard[rowIndex][colIndex] = "|X|";
+                System.out.println("Treffer bei " + entryColumn + " " + entryRow + "!");
+                break;
+            } else if (userBoard[rowIndex][colIndex].equals("|X|") || userBoard[rowIndex][colIndex].equals("|~|")) {
+                System.out.println(alreadyShooted);
+            } else {
+                userBoard[rowIndex][colIndex] = "|~|";
+                System.out.println("Daneben bei " + entryColumn + " " + entryRow + ".");
+                break;
+            }
+        }
+
+        String fireInTheHole = "FEUER! ----- ";
+        System.out.println(fireInTheHole);
+    }
+}
