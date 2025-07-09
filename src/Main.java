@@ -72,3 +72,10 @@ public class Main {
                         "5: Karte ansehen" + "\n" +
                         "6: Spiel beenden";
     }
+
+    public static void showBoardOverview(Map map, String[][] userBoard, String[][] computerBoard) {
+        System.out.println("EIGENE KARTE:");
+        map.printMap(userBoard);
+        System.out.println("COMPUTER KARTE:");
+        map.printMap(computerBoard);
+    }
