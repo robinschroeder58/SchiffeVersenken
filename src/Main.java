@@ -43,7 +43,9 @@ public class Main {
 
         String outputEntryColumn = "Bitte geben Sie eine Spalte ein.";
         String outputEntryRow = "Bitte geben Sie eine Reihe ein.";
-        String outputEntryHorizontally = "Soll es horizontal platzier werden? (y/n):";
+        String outputEntryHorizontally = "Soll es horizontal platziert werden? (y/n):";
+
+        String menuPlaying = "1: Schießen" + "\n" + "2: Karte ansehen" + "\n" + "3: Spiel beenden";
 
         String outputNoPlacmentHappend = "Platzierung fehlgeschlagen. Bitte versuchen Sie es erneut.";
 
@@ -192,14 +194,13 @@ public class Main {
                                 if (numberDestroyer == 4 && numberCruiser == 2 && numberBattleship == 1) {
 
                                     while (true) {
+                                        System.out.println(menuPlaying);
                                         int entryGameplay = scanner.nextInt();
                                         scanner.nextLine();
 
                                         switch (entryGameplay) {
                                             case 1:
-
                                                 shooting(computerBoard, scanner);
-
                                                 break;
                                             case 2:
                                                 showBoardOverview(map, userBoard, computerBoard);
@@ -354,14 +355,14 @@ public class Main {
             scanner.nextLine(); // clear buffer
             int rowIndex = entryRow - 1;
 
-            if (userBoard[rowIndex][colIndex].equals("|Z|") || userBoard[rowIndex][colIndex].equals("|K|") || userBoard[rowIndex][colIndex].equals("|B|")) {
+            if (userBoard[rowIndex][colIndex].equals("|X|")) {
+                System.out.println(alreadyShooted);
+            } else if (userBoard[rowIndex][colIndex].equals("|Z|") || userBoard[rowIndex][colIndex].equals("|K|") || userBoard[rowIndex][colIndex].equals("|B|")) {
                 userBoard[rowIndex][colIndex] = "|X|";
                 System.out.println("Treffer bei " + entryColumn + " " + entryRow + "!");
                 break;
-            } else if (userBoard[rowIndex][colIndex].equals("|X|") || userBoard[rowIndex][colIndex].equals("|~|")) {
-                System.out.println(alreadyShooted);
             } else {
-                userBoard[rowIndex][colIndex] = "|~|";
+                userBoard[rowIndex][colIndex] = "|X|";
                 System.out.println("Daneben bei " + entryColumn + " " + entryRow + ".");
                 break;
             }
