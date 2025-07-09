@@ -1,5 +1,22 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        Map map = new Map();
+
+        int size = 10;
+        String[][] userBoard = new String[size][size];
+        String[][] computerBoard = new String[size][size];
+
+        map.createMap(userBoard, size);
+        map.createMap(computerBoard, size);
+
+        String username = "";
+        int numberDestroyer = 0;
+        int numberCruiser = 0;
+        int numberBattleship = 0;
 
 
         System.out.println("Hello World!");
