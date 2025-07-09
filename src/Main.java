@@ -79,3 +79,38 @@ public class Main {
         System.out.println("COMPUTER KARTE:");
         map.printMap(computerBoard);
     }
+
+    public static boolean confirmPlace(String[][] board, String column, int row, String horizontal, int shipLength) {
+
+        String outputNoPlace = "Das Schiff kann hier nicht platziert werden";
+        String outputPlaceAlreadyOccupied = "Hier ist bereits ein Schiff platziert";
+
+        int colIndex = column.charAt(0) - 'A';
+        int rowIndex = row - 1;
+        int size = board.length;
+
+        if (horizontal.equals("Y")) {
+            if (colIndex + shipLength > size) {
+                System.out.println(outputNoPlace);
+                return false;
+            }
+            for (int i = 0; i < shipLength; i++) {
+                if (!board[rowIndex][colIndex + i].equals("| |")) {
+                    System.out.println(outputPlaceAlreadyOccupied);
+                    return false;
+                }
+            }
+        } else { // Vertikal
+            if (rowIndex + shipLength > size) {
+                System.out.println(outputNoPlace);
+                return false;
+            }
+            for (int i = 0; i < shipLength; i++) {
+                if (!board[rowIndex + i][colIndex].equals("| |")) {
+                    System.out.println(outputPlaceAlreadyOccupied);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
