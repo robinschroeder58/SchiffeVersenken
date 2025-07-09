@@ -18,6 +18,29 @@ public class Main {
         int numberCruiser = 0;
         int numberBattleship = 0;
 
+        String welcome = "Willkommen im Spiel Schiffeversenken";
+
+        String menuStartExit = "1: Spiel starten" + "\n" + "2: Spiel beenden" + "\n";
+
+        String menuUsername = "Bitte geben Sie einen Username ein:";
+        String menuConfirmedUsername = "Username: " + username + "bestätigen? (y/n):";
+
+        String outputStartGame = "Neues Spiel wird gestartet." + "\n" + "Die See erwartet euch, Kapitän: " + username;
+
+        String outputEntryColumn = "Bitte geben Sie eine Spalte ein.";
+        String outputEntryRow = "Bitte geben Sie eine Reihe ein.";
+        String outputEntryHorizontally = "Soll es horizontal platzier werden? (y/n):";
+
+        String outputNoPlacmentHappend = "Platzierung fehlgeschlagen. Bitte versuchen Sie es erneut.";
+
+        String outputAllShipPlaced = "Es sind alle Schiffe platziert";
+        String outputNotAllShipPlaced = "Es sind noch nicht alle Schiffe platziert!";
+        String outputCounterShipPlacedFull = "Es sind alle verfügbaren Schiffe dieser Kategorie platziert worden!";
+
+        String outputInvalidEntry = "Ungültige Eingabe!";
+
+        String menuConfirmExit = "Sicher das Sie das Spiel beenden wollen? (y/n)";
+        String outputExit = "Spiel wird beendet!";
 
         System.out.println("Hello World!");
 
