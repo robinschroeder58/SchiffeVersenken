@@ -345,6 +345,8 @@ public class Main {
 
         String alreadyShooted = "Dieser Bereich wurde bereits beschossen, bitte erneut versuchen.";
 
+        String fireInTheHole = "FEUER! ----- ";
+
         while (true) {
             System.out.println(outputNeedCoordinates);
             // Spalte
@@ -358,19 +360,18 @@ public class Main {
             scanner.nextLine(); // clear buffer
             int rowIndex = entryRow - 1;
 
-            if (userBoard[rowIndex][colIndex].equals("|X|")) {
+            if (userBoard[rowIndex][colIndex].equals("|X|") || userBoard[rowIndex][colIndex].equals("|~|")) {
                 System.out.println(alreadyShooted);
             } else if (userBoard[rowIndex][colIndex].equals("|Z|") || userBoard[rowIndex][colIndex].equals("|K|") || userBoard[rowIndex][colIndex].equals("|B|")) {
                 userBoard[rowIndex][colIndex] = "|X|";
                 System.out.println("Treffer bei " + entryColumn + " " + entryRow + "!");
             } else {
-                userBoard[rowIndex][colIndex] = "|X|";
+                userBoard[rowIndex][colIndex] = "|~|";
                 System.out.println("Daneben bei " + entryColumn + " " + entryRow + ".");
                 break;
             }
         }
 
-        String fireInTheHole = "FEUER! ----- ";
         System.out.println(fireInTheHole);
     }
 }
