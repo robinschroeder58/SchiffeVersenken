@@ -201,6 +201,9 @@ public class Main {
                                         switch (entryGameplay) {
                                             case 1:
                                                 shooting(computerBoard, scanner);
+
+
+
                                                 break;
                                             case 2:
                                                 showBoardOverview(map, userBoard, computerBoard);
@@ -360,7 +363,6 @@ public class Main {
             } else if (userBoard[rowIndex][colIndex].equals("|Z|") || userBoard[rowIndex][colIndex].equals("|K|") || userBoard[rowIndex][colIndex].equals("|B|")) {
                 userBoard[rowIndex][colIndex] = "|X|";
                 System.out.println("Treffer bei " + entryColumn + " " + entryRow + "!");
-                break;
             } else {
                 userBoard[rowIndex][colIndex] = "|X|";
                 System.out.println("Daneben bei " + entryColumn + " " + entryRow + ".");
