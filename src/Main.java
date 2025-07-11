@@ -13,6 +13,8 @@ public class Main {
         map.createMap(userBoard, size);
         map.createMap(computerBoard, size);
 
+        Computer pc1 = new Computer();
+
         String username = "";
         int numberDestroyer = 0;
         int numberCruiser = 0;
@@ -74,7 +76,7 @@ public class Main {
                         entryUsername = entryUsername.trim();
                         username = entryUsername;
 
-                        if (!entryUsername.trim().isEmpty()) {
+                        if (!entryUsername.isEmpty()) {
                             System.out.println(menuConfirmedUsername);
                             String confirmUsername = scanner.nextLine().toLowerCase();
 
@@ -121,6 +123,7 @@ public class Main {
                                     entryHorizontal = entryHorizontal.toUpperCase().trim();
 
                                     //Übergabe an Funktion zum Prüfen des Platzes und platzieren des Schiffes.
+
                                     placeable = placeShip(userBoard, entryColumn, entryRow, entryHorizontal, destroyerLength, symbolDestroyer);
 
                                     if (placeable) {
@@ -201,9 +204,8 @@ public class Main {
                                         switch (entryGameplay) {
                                             case 1:
                                                 shooting(computerBoard, scanner);
-
-
-
+                                                pc1.computerShooting(userBoard);
+                                                showBoardOverview(map, userBoard, computerBoard);
                                                 break;
                                             case 2:
                                                 showBoardOverview(map, userBoard, computerBoard);
@@ -250,7 +252,6 @@ public class Main {
                     }
                     System.out.println(outputExit);
                     System.exit(0);
-                    break;
 
                 default:
                     System.out.println(outputInvalidEntry);
