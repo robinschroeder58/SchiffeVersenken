@@ -376,5 +376,30 @@ public class Main {
         }
 
         System.out.println(fireInTheHole);
+
+        if (validGameBoard(userBoard)) {
+            System.exit(0);
+        }
+    }
+
+    public static boolean validGameBoard(String[][] gameBoard){
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].length; j++) {
+
+                if (gameBoard[i][j].equals("|Z|") || gameBoard[i][j].equals("|K|") || gameBoard[i][j].equals("|B|")){
+                    return false;
+                }
+            }
+        }
+        System.out.println("Alle Schiffe zerstört – Sieg!");
+        return true;
+    }
+
+    public static boolean validUserInput(char colIndex, int rowIndex){
+        if (colIndex < 'A' || colIndex >= 'J' || rowIndex < 0 || rowIndex >= 10){
+            System.out.println("Ungültige Koordinaten!");
+            return false;
+        }
+        return true;
     }
 }
