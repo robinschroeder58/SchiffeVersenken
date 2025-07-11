@@ -1,5 +1,5 @@
 public class Computer {
-    public static void computerShooting(String[][] userBoard) {
+    public void computerShooting(String[][] userBoard) {
 
 
         String fireInTheHole = "FEUER! ----- ";
@@ -37,7 +37,7 @@ public class Computer {
         System.out.println(fireInTheHole);
     }
 
-    public static int generateCoordinates() {
+    public int generateCoordinates() {
         //generier eine zufällig Zahl zwischen 0 - 10 -> für den Index
         return (int) Math.floor(Math.random() * 10);
     }
