@@ -205,7 +205,7 @@ public class Main {
 
                                         switch (entryGameplay) {
                                             case 1:
-                                                shooting(computerBoard, scanner);
+                                                shooting(map, computerBoard, userBoard, scanner);
                                                 pc1.computerShooting(userBoard);
                                                 showBoardOverview(map, userBoard, computerBoard);
                                                 break;
@@ -340,7 +340,10 @@ public class Main {
         return false;
     }
 
-    public static void shooting(String[][] userBoard, Scanner scanner) {
+    public static void shooting(Map map, String[][] computerBoard, String[][] userBoard, Scanner scanner) {
+
+        String dash = "---------------------------------";
+
         String outputNeedCoordinates = "Erbitte um Koordinaten!";
 
         String outputEntryColumn = "Bitte geben Sie eine Spalte ein:";
@@ -363,21 +366,24 @@ public class Main {
             scanner.nextLine(); // clear buffer
             int rowIndex = entryRow - 1;
 
-            if (userBoard[rowIndex][colIndex].equals("|X|") || userBoard[rowIndex][colIndex].equals("|~|")) {
+            if (computerBoard[rowIndex][colIndex].equals("|X|") || computerBoard[rowIndex][colIndex].equals("|~|")) {
                 System.out.println(alreadyShooted);
-            } else if (userBoard[rowIndex][colIndex].equals("|Z|") || userBoard[rowIndex][colIndex].equals("|K|") || userBoard[rowIndex][colIndex].equals("|B|")) {
-                userBoard[rowIndex][colIndex] = "|X|";
-                System.out.println("Treffer bei " + entryColumn + " " + entryRow + "!");
+                showBoardOverview(map, userBoard, computerBoard);
+            } else if (computerBoard[rowIndex][colIndex].equals("|Z|") || computerBoard[rowIndex][colIndex].equals("|K|") || computerBoard[rowIndex][colIndex].equals("|B|")) {
+                computerBoard[rowIndex][colIndex] = "|X|";
+                System.out.println("TREFFER!!! : " + entryColumn + " " + entryRow + "!");
+                showBoardOverview(map, userBoard, computerBoard);
+                System.out.println(dash);
             } else {
-                userBoard[rowIndex][colIndex] = "|~|";
-                System.out.println("Daneben bei " + entryColumn + " " + entryRow + ".");
+                computerBoard[rowIndex][colIndex] = "|~|";
+                System.out.println("Daneben: " + entryColumn + " " + entryRow + ".");
                 break;
             }
         }
 
         System.out.println(fireInTheHole);
 
-        if (validGameBoard(userBoard)) {
+        if (validGameBoard(computerBoard)) {
             System.exit(0);
         }
     }
