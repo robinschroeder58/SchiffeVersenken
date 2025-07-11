@@ -196,6 +196,8 @@ public class Main {
                             case 4:
                                 if (numberDestroyer == 4 && numberCruiser == 2 && numberBattleship == 1) {
 
+                                    pc1.computerPlaceShips(computerBoard);
+
                                     while (true) {
                                         System.out.println(menuPlaying);
                                         int entryGameplay = scanner.nextInt();
