@@ -48,7 +48,6 @@ public class Computer {
         int placedDestroyer = 0;
         int placedCruiser = 0;
         int placedBattleships = 0;
-        int counter = 0;
 
         // Schleife bis alle Schiffe platziert sind
         while (placedDestroyer < 4 || placedCruiser < 2 || placedBattleships < 1) {
@@ -66,8 +65,6 @@ public class Computer {
                 placeShip(computerBoard, colIndex, rowIndex, horizontal, 4);
                 placedBattleships++;
             }
-            counter++;
-            System.out.println(counter);
         }
 
     }
