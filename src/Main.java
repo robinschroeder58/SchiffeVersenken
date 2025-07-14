@@ -9,13 +9,14 @@ public class Main {
         int size = 10;
         String[][] userBoard = new String[size][size];
         String[][] computerBoard = new String[size][size];
+        String[][] shootingBoard = new String[size][size];
 
         map.createMap(userBoard, size);
         map.createMap(computerBoard, size);
+        map.createMap(shootingBoard, size);
 
         Computer pc1 = new Computer();
 
-        String username = "";
         int numberDestroyer = 0;
         int numberCruiser = 0;
         int numberBattleship = 0;
@@ -39,9 +40,8 @@ public class Main {
         String menuStartExit = "1: Spiel starten" + "\n" + "2: Spiel beenden" + "\n";
 
         String menuUsername = "Bitte geben Sie einen Username ein:";
-        String menuConfirmedUsername = "Username: " + username + "bestätigen? (y/n):";
 
-        String outputStartGame = "Neues Spiel wird gestartet." + "\n" + "Die See erwartet euch, Kapitän: " + username;
+        String outputStartGame = "Neues Spiel wird gestartet." + "\n" + "Die See erwartet euch, Kapitän: ";
 
         String outputEntryColumn = "Bitte geben Sie eine Spalte ein.";
         String outputEntryRow = "Bitte geben Sie eine Reihe ein.";
@@ -60,6 +60,12 @@ public class Main {
         String menuConfirmExit = "Sicher das Sie das Spiel beenden wollen? (y/n)";
         String outputExit = "Spiel wird beendet!";
 
+        String dash = "---------------------------------";
+
+
+//        ToDo: Eingabe validieren!
+
+
         while (true) {
 
             System.out.println(welcome);
@@ -72,16 +78,15 @@ public class Main {
                 case 1:
                     while (true) {
                         System.out.println(menuUsername);
-                        String entryUsername = scanner.nextLine();
-                        entryUsername = entryUsername.trim();
-                        username = entryUsername;
+                        String username = scanner.nextLine();
+                        username = username.trim();
 
-                        if (!entryUsername.isEmpty()) {
-                            System.out.println(menuConfirmedUsername);
+                        if (!username.isEmpty()) {
+                            System.out.println("Username: " + username + " bestätigen? (y/n):");
                             String confirmUsername = scanner.nextLine().toLowerCase();
 
                             if (confirmUsername.equals("y")) {
-                                System.out.println(outputStartGame);
+                                System.out.println(outputStartGame + username);
                                 break;
                             } else if (confirmUsername.equals("n")) {
                                 System.out.println("Erneuter Versuch.");
@@ -97,6 +102,7 @@ public class Main {
                         map.printMap(userBoard);
                         if (numberDestroyer == 4 && numberCruiser == 2 && numberBattleship == 1) {
                             System.out.println(outputAllShipPlaced);
+                            System.out.println(dash);
                         }
                         System.out.println(getMenuShipPlacement(numberDestroyer, numberCruiser, numberBattleship));
                         System.out.println();
@@ -204,12 +210,16 @@ public class Main {
                                         scanner.nextLine();
 
                                         switch (entryGameplay) {
+
                                             case 1:
-                                                shooting(map, computerBoard, userBoard, scanner);
+                                                shooting(map, computerBoard, shootingBoard, userBoard, scanner);
+
                                                 pc1.computerShooting(userBoard);
-                                                showBoardOverview(map, userBoard, computerBoard);
+                                                showBoardOverview(map, userBoard, shootingBoard);
                                                 break;
                                             case 2:
+                                                showBoardOverview(map, userBoard, shootingBoard);
+                                                System.out.println("------------nur zum pürfen------------");
                                                 showBoardOverview(map, userBoard, computerBoard);
                                                 break;
                                             case 3:
@@ -230,7 +240,7 @@ public class Main {
                                 }
                                 break;
                             case 5:
-                                showBoardOverview(map, userBoard, computerBoard);
+                                showBoardOverview(map, userBoard, shootingBoard);
                                 break;
                             case 6:
                                 System.out.println(menuConfirmExit);
@@ -340,7 +350,7 @@ public class Main {
         return false;
     }
 
-    public static void shooting(Map map, String[][] computerBoard, String[][] userBoard, Scanner scanner) {
+    public static void shooting(Map map, String[][] computerBoard, String[][] shootingBoard, String[][] userBoard, Scanner scanner) {
 
         String dash = "---------------------------------";
 
@@ -368,14 +378,16 @@ public class Main {
 
             if (computerBoard[rowIndex][colIndex].equals("|X|") || computerBoard[rowIndex][colIndex].equals("|~|")) {
                 System.out.println(alreadyShooted);
-                showBoardOverview(map, userBoard, computerBoard);
+                showBoardOverview(map, userBoard, shootingBoard);
             } else if (computerBoard[rowIndex][colIndex].equals("|Z|") || computerBoard[rowIndex][colIndex].equals("|K|") || computerBoard[rowIndex][colIndex].equals("|B|")) {
                 computerBoard[rowIndex][colIndex] = "|X|";
+                shootingBoard[rowIndex][colIndex] = "|X|";
                 System.out.println("TREFFER!!! : " + entryColumn + " " + entryRow + "!");
-                showBoardOverview(map, userBoard, computerBoard);
+                showBoardOverview(map, userBoard, shootingBoard);
                 System.out.println(dash);
             } else {
                 computerBoard[rowIndex][colIndex] = "|~|";
+                shootingBoard[rowIndex][colIndex] = "|~|";
                 System.out.println("Daneben: " + entryColumn + " " + entryRow + ".");
                 break;
             }
